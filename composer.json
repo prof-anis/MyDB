@@ -1,0 +1,16 @@
+{
+    "name": "anifowose/anis",
+    "authors": [
+        {
+            "name": "prof-anis",
+            "email": "emeritusprofessoranis@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Controller\\": "Controller/"
+        }
+
+    }
+}

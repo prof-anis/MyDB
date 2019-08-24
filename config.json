@@ -1,0 +1,9 @@
+{
+  "DB":{
+       "databaseName":"sparker",
+       "databaseHost":"localhost",
+       "databasePass":"fruitfulbough",
+       "databaseUsername":"phpmyadmin@localhost"
+      }
+
+}

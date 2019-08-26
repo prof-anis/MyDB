@@ -1,6 +1,7 @@
 <?php
 namespace Controller;
 use Controller\Grammer;
+use Controller\Connection;
 /**
  *
  */
@@ -67,7 +68,26 @@ class DB
 
   public function get()
   {
-  var_dump($this->getQuery());
+    $rr=new Connection;
+    $rr=$rr->query($this->getQuery())->get();
+    return $rr;
+
+  }
+
+  public function first()
+  {
+    $rr=new Connection;
+    $rr=$rr->query($this->getQuery())->get();
+
+    return $rr[0];
+  }
+
+  public function last()
+  {
+    $rr=new Connection;
+    $rr=$rr->query($this->getQuery())->get();
+    $rr=$rr[count($rr)-1];
+    return $rr;
   }
 
   public function getQuery()
@@ -75,7 +95,14 @@ class DB
 
     $sql=new Grammer();
     $sql=$sql->process();
+
     return $sql;
+  }
+
+
+  public function __get($variable)
+  {
+    //return $this->first->
   }
 
 

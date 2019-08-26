@@ -1,9 +1,9 @@
 {
-  "DB":{
-       "databaseName":"sparker",
+
+       "databaseName":"sparkcoop",
        "databaseHost":"localhost",
        "databasePass":"fruitfulbough",
        "databaseUsername":"phpmyadmin@localhost"
-      }
+
 
 }

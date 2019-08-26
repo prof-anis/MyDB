@@ -22,7 +22,7 @@ $tryer=new JJ;
 //$b=DB::getInstance();
 //var_dump($b);
 
-var_dump(JJ::select('username','age','sex')->orderBy('id','ASC')->getQuery());
+var_dump(JJ::last());
 
 
 

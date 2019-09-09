@@ -19,6 +19,13 @@ class DB
 
   public $orderBy;
 
+  public $isInsert = false;
+
+  public $isSelect = false;
+
+  public $insert;
+
+
 
   public static function getInstance()
   {
@@ -54,6 +61,7 @@ class DB
   public function select()
   {
     $this->select = func_get_args();
+    $this->isSelect = true;
 
     return $this;
 
@@ -68,7 +76,9 @@ class DB
 
   public function get()
   {
+    $this->isSelect = true;
     $rr=new Connection;
+
     $rr=$rr->query($this->getQuery())->get();
     return $rr;
 
@@ -77,18 +87,33 @@ class DB
   public function first()
   {
     $rr=new Connection;
+    $this->isSelect = true;
     $rr=$rr->query($this->getQuery())->get();
 
+    
     return $rr[0];
   }
 
   public function last()
   {
     $rr=new Connection;
+    $this->isSelect = true;
     $rr=$rr->query($this->getQuery())->get();
     $rr=$rr[count($rr)-1];
     return $rr;
   }
+
+
+  public function insert(array $insert)
+  {
+    $this->isInsert=true;
+    $this->insert = $insert;
+    return $this->getQuery();
+  }
+
+
+
+
 
   public function getQuery()
   {
@@ -100,10 +125,15 @@ class DB
   }
 
 
+
+
   public function __get($variable)
   {
-    //return $this->first->
+
+
   }
+
+
 
 
 

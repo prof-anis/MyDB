@@ -18,6 +18,7 @@ class Grammer
       "select"=>Proccessor\Select::class,
       "where"=>Proccessor\Where::class,
       "orderBy"=>Proccessor\Order::class,
+      "insert"=>Proccessor\Insert::class,
 
 
     ];

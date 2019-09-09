@@ -16,6 +16,9 @@ class Connection
     $this->config=\json_decode($config);
     $this->connect();
 
+    
+
+
   }
 
   function __get($variable)
@@ -38,7 +41,12 @@ class Connection
   }
 
   public function get()
-  {	$result=[];
+  {
+    if($this->result == null)
+    {
+      return null;
+    }
+    $result=[];
     while ($row = $this->result->fetch_assoc()) {
       $result[]=$row;
     }

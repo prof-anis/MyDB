@@ -4,6 +4,7 @@
 require "vendor/autoload.php";
 
 class_alias(Controller\User::class,'JJ');
+
 /**
  *
  */
@@ -22,7 +23,7 @@ $tryer=new JJ;
 //$b=DB::getInstance();
 //var_dump($b);
 
-var_dump(JJ::last());
+var_dump(JJ::first());
 
 
 

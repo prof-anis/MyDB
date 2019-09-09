@@ -2,7 +2,9 @@
 
 namespace Controller\Proccessor;
 
-class Where
+
+use Controller\Proccessor\Processor;
+class Where   extends Processor
 {
   public $where;
   public $query;

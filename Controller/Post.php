@@ -5,17 +5,18 @@ use Controller\Model;
 /**
  *
  */
-class User extends Model
+class Posts extends Model
 {
 
 
   function __construct()
   {
 
-        self:: $table="users";
+        self:: $table="posts";
 
 
   }
+
 
 
 

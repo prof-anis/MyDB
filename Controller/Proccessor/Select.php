@@ -1,17 +1,25 @@
 <?php
-namespace controller\proccessor;
+namespace Controller\Proccessor;
 
+
+use Controller\Proccessor\Processor;
 use controller\DB;
 
-class Select
+class Select  extends Processor
 {
-  function __construct($select,$table)
+  function __construct()
   {
-    $this->select=$select;
+    parent::__construct();
 
-    $this->table=$table;
 
-    $this->process();
+    $this->query = "";
+
+    if($this->isOperation())
+    {
+        $this->process();
+    }
+
+
 
   }
 
@@ -21,16 +29,23 @@ class Select
     //first , what if select was not called at all?
     //we return all
 
-    if($this->select == null)
+    if($this->db->select == null )
     {
-      $this->query=" SELECT * FROM ".$this->table;
+      $this->query=" SELECT * FROM ".$this->db->table;
     }
     //it takes in an array of all the argument passed. we want to convert it to a string
-    elseif(is_array($this->select)){
+    elseif(is_array($this->db->select)){
 
-      $this->query="SELECT ".\implode(',',$this->select)." FROM ".$this->table;
+      $this->query="SELECT ".\implode(',',$this->db->select)." FROM ".$this->db->table;
     }
 
+  }
+
+
+
+  private function isOperation()
+  {
+    return ($this->db->isSelect == null) ? false : true;
   }
 
 }

@@ -14,10 +14,11 @@ class Select  extends Processor
 
     $this->query = "";
 
-    if($this->isOperation())
-    {
+
+
+
         $this->process();
-    }
+
 
 
 
@@ -43,10 +44,7 @@ class Select  extends Processor
 
 
 
-  private function isOperation()
-  {
-    return ($this->db->isSelect == null) ? false : true;
-  }
+
 
 }
 

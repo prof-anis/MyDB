@@ -8,11 +8,15 @@ use Controller\Model;
 class User extends Model
 {
 
+	protected  $table="users";
+
+	public $fillable=['kk'];
+	
 
   function __construct()
   {
 
-        self:: $table="users";
+    
 
 
   }

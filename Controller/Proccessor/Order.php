@@ -7,10 +7,10 @@ class Order extends Processor
 {
   public $query;
 
-    function __construct($orderBy)
+    function __construct()
     {
       parent::__construct();
-      $this->orderBy=$orderBy;
+      $this->orderBy=$this->db->orderBy;
       $this->process();
 
     }

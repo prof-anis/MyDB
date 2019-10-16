@@ -8,6 +8,8 @@ class Processor
   function __construct()
   {
     $this->db=DB::getInstance();
+ 
+
   
   }
 }

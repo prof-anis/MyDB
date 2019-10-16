@@ -1,7 +1,7 @@
 <?php
 
 namespace Controller;
-
+use Exception;
 /**
  *
  */
@@ -34,24 +34,32 @@ class Connection
 
   public  function  query($sql)
   {
-  $this->result =   $this->connection->query($sql);
-  return $this;
+
+     
+      $this->result =   $this->connection->query($sql);
+
+      return $this;
 
 
   }
 
+
+
   public function get()
   {
+   
     if($this->result == null)
     {
       return null;
     }
     $result=[];
+    
     while ($row = $this->result->fetch_assoc()) {
       $result[]=$row;
     }
 
     return $result;
+    dd($result);
   }
 
 }

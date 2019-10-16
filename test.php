@@ -3,7 +3,7 @@
 
 require "vendor/autoload.php";
 
-class_alias(Controller\User::class,'JJ');
+use Controller\User;
 
 /**
  *
@@ -13,18 +13,32 @@ function dd($value)
   var_dump($value);
   exit;
 }
- use JJ;
 
 
 
-$tryer=new JJ;
-//$a=DB::getInstance();
-//$a->query="hello world!";
-//$b=DB::getInstance();
-//var_dump($b);
-
-var_dump(JJ::first());
 
 
 
- ?>
+
+
+
+//$pp=User::where('id',"!=","null")->update(['username'=>'anis']);
+$rr=User::delete();
+//$rr=User::select('username')->get();
+dd($rr);
+
+//dd($pp);
+foreach ($pp as $key => $value) {
+
+	var_dump($value);
+	//var_dump($value['first_name']);
+}
+exit();
+
+for ($i=0; $i < count ($pp); $i++) { 
+	//var_dump($pp[$i]);
+}
+
+
+
+ 

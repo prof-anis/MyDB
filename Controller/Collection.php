@@ -3,23 +3,26 @@
 namespace Controller;
 
 use ArrayAccess;
+use Iterator;
 
 /**
  * 
  */
-class Collection implements ArrayAccess
+class Collection implements ArrayAccess,Iterator
 {
 		
 
 		public $model;
 
 		public $elements;
+
+		public $counter;
 		
 		function __construct($data,$model=null)
 		{
 
 			
-
+			$this->counter =0;
 
 			
 
@@ -42,8 +45,9 @@ class Collection implements ArrayAccess
 
 			public function isNotMultidimesional($array)
 			{
+				if(is_array($array)){
 
-				foreach ($array as $key => $value) {
+					foreach ($array as $key => $value) {
 					if(is_array($value))
 					{
 						
@@ -57,14 +61,22 @@ class Collection implements ArrayAccess
 
 
 				return in_array(false, $state);
+				}
+
+				return null;
+				
 			}
 
 
 			public function toModel($attributes)
 			{
-				
-				if(!$this->isNotMultidimesional($attributes))
+
+				if(is_array($attributes))
 				{
+					
+					if(!$this->isNotMultidimesional($attributes))
+				{
+					
 					foreach($attributes as $key=>$eachAttribute)
 
 					{
@@ -79,9 +91,20 @@ class Collection implements ArrayAccess
 
 					$data=new $this->model;
 					$data->attributes=$attributes;
+
 					$this->elements[]=$data;
+					
 
 				}
+			}
+
+			else{
+				
+			}
+
+
+			
+				
 			}
 
 	/**
@@ -133,4 +156,32 @@ class Collection implements ArrayAccess
 
 
 		
+
+
+	public function next()
+	{
+		++$this->counter;
 	}
+
+	public function rewind()
+	{
+		$this->counter = 0;
+
+	}
+
+	public function current()
+	{
+		return $this->elements[$this->counter];
+	}
+
+	public function key()
+	{
+		return $this->counter;
+	}
+
+	public function valid()
+	{
+		return isset($this->elements[$this->counter]);
+	}
+
+}

@@ -14,10 +14,7 @@ class Select  extends Processor
 
     $this->query = "";
 
-
-
-
-        $this->process();
+    $this->process();
 
 
 

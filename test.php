@@ -4,6 +4,7 @@
 require "vendor/autoload.php";
 
 use Controller\User;
+use Controller\Society;
 
 /**
  *
@@ -14,6 +15,18 @@ function dd($value)
   exit;
 }
 
+ function resetClass($object)
+	{
+		$class_properties=get_object_vars($object);
+
+
+		
+		foreach ($object as $key => $value) {
+
+		$object->$key = null;
+
+		}
+	}	
 
 
 
@@ -22,23 +35,13 @@ function dd($value)
 
 
 
-//$pp=User::where('id',"!=","null")->update(['username'=>'anis']);
-$rr=User::delete();
-//$rr=User::select('username')->get();
-dd($rr);
 
-//dd($pp);
-foreach ($pp as $key => $value) {
+//$pp=User::get();
 
-	var_dump($value);
-	//var_dump($value['first_name']);
-}
-exit();
 
-for ($i=0; $i < count ($pp); $i++) { 
-	//var_dump($pp[$i]);
-}
+$jj=User::where('id',20)->first()->society;
 
 
 
- 
+
+dd($jj);

@@ -5,14 +5,14 @@ use Controller\Model;
 /**
  *
  */
-class Posts extends Model
+class Society extends Model
 {
-
+	protected $table = "societies";
 
   function __construct()
   {
 
-        self:: $table="posts";
+      
 
 
   }

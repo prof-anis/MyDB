@@ -87,20 +87,19 @@ class Grammer
   {
     $operation='';
       
-      if($this->db->isSelect == true)
+      if($this->isOperation('isSelect'))
       {
         $operation="select";
       }
-      elseif ($this->db->isInsert == true) {
+      elseif ($this->isOperation('isInsert')) {
         $operation="insert";
       }
-      elseif ($this->db->isUpdate == true) {
+      elseif ($this->isOperation('isUpdate')) {
         $operation="update";
       }
-      elseif ($this->db->isDelete == true) {
+      elseif ($this->isOperation('isDelete')) {
         $operation='delete';
       }
-
 
 
       return $operation;
@@ -109,6 +108,24 @@ class Grammer
   public function clause($operation)
   {
     return $this->clause[$operation];
+  }
+
+  public function isOperation($operation)
+  {
+    if(isset($this->db->$operation))
+    {
+      if($this->db->$operation == true)
+      {
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    else
+    {
+      return false;
+    }
   }
 
 

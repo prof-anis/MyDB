@@ -36,6 +36,7 @@ class DB
 
 
 
+
   public static function getInstance()
   {
 
@@ -100,6 +101,7 @@ class DB
   public function get()
   {
     $this->isSelect = true;
+
     $rr=new Connection;
 
     $rr=$rr->query($this->getQuery())->get();
@@ -110,6 +112,14 @@ class DB
 
   }
 
+  public function find($value,$field="id")
+  {
+   
+    $this->where[]=[$value,$field];
+
+    return $this->first();
+  }
+
   public function first()
   {
     $rr=new Connection;
@@ -118,7 +128,7 @@ class DB
 
     $rr=$rr->query($this->getQuery())->get();
 
-    return $this->processResult($rr[0]);
+    return $this->processResult($rr[0])[0];
 
     
  
@@ -130,7 +140,8 @@ class DB
     $this->isSelect = true;
     $rr=$rr->query($this->getQuery())->get();
     $rr=$rr[count($rr)-1];
-    return $rr;
+    return $this->processResult($rr)[0];
+   
   }
 
 
@@ -140,6 +151,8 @@ class DB
     $this->isInsert=true;
     $this->insert = $insert;
     $rr=new Connection();
+
+    dd($this->getQuery());
 
     dd($rr->query($this->getQuery())->get());
   }
@@ -152,6 +165,8 @@ class DB
     $conn=new Connection();
 
    $conn->query($this->getQuery());
+
+       resetClass(DB::getInstance());
 
    return $conn->connection->affected_rows;
 
@@ -173,12 +188,14 @@ class DB
 
   public function processResult($value)
   {
-    dd($value);
+  
 
     if(isset($this->model))
     {
       $collection = new Collection($value,$this->model);
-      
+        
+    resetClass(DB::getInstance());
+
       return $collection;
 
     }
@@ -190,11 +207,25 @@ class DB
 
   public function getQuery()
   {
-
+   
     $sql=new Grammer();
     $sql=$sql->process();
 
     return $sql;
+  }
+
+  public function getSelectQuery()
+  {
+    $this->isSelect=true;
+     $sql=new Grammer();
+    $sql=$sql->process();
+
+    return $sql;
+  }
+
+  public function __toString()
+  {
+    return get_class();
   }
 
 

@@ -7,8 +7,12 @@
 
  use Controller\DB;
  use ArrayAccess;
+ use Exceptions;
+ use Controller\BaseModel;
 
-class Model implements ArrayAccess
+
+
+class Model extends BaseModel implements ArrayAccess
 {
   public static $db;
 
@@ -17,6 +21,8 @@ class Model implements ArrayAccess
   protected  $table;
 
   public $attributes;
+
+  public $counter = 0;
 
   function __construct()
   {
@@ -61,10 +67,27 @@ class Model implements ArrayAccess
   }
 
   public function __get($variable)
-  {
+  { 
 
-    return (!isset($this->attributes[$variable])) ? null : $this->attributes[$variable];
+
+    if(isset($this->attributes[$variable]))
+    {
+      return $this->attributes[$variable];
+    }
+
+    elseif(method_exists($this, $variable))
+    {
+
+       return $this->$variable()->get();
+    }
     
+    return "ll";
+    
+  }
+
+  public function __set($variable,$value)
+  {
+    $this->attributes[$variable] = $value;
   }
 
   public function getTableName()
@@ -104,7 +127,7 @@ class Model implements ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        //$this->setAttribute($offset, $value);
+        $this->attributes[$offset] =  $value;
     }
 
     /**
@@ -116,7 +139,30 @@ class Model implements ArrayAccess
     public function offsetUnset($offset)
     {
         //unset($this->attributes[$offset], $this->relations[$offset]);
-    }     
+    } 
+
+    public function save()
+    {
+      // i want to check first if the attributes are complete. i would use the fillable property
+
+      
+      $db = DB::getInstance();
+
+      return $db->insert($this->attributes);
+
+    }
+
+    public function __toString()
+    {
+      $array=explode("\\",get_class($this));
+
+      return strtolower($array[count($array) -1 ]);
+    }
+
+
+
+
+
 
 
   

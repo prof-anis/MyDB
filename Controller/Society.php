@@ -12,9 +12,11 @@ class Society extends Model
   function __construct()
   {
 
-      
+  }
 
-
+  public function user()
+  {
+  	return $this->belongsTo('Controller\User') ;
   }
 
 

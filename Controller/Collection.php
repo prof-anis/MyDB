@@ -4,11 +4,12 @@ namespace Controller;
 
 use ArrayAccess;
 use Iterator;
+use Controller\BaseCollection;
 
 /**
  * 
  */
-class Collection implements ArrayAccess,Iterator
+class Collection extends BaseCollection implements ArrayAccess,Iterator
 {
 		
 

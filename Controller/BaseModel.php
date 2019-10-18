@@ -2,13 +2,13 @@
 
 namespace Controller;
 
-use Controller\Relationships\HasMany;
+use Controller\Relationships\Relations;
 /**
  * 
  */
 class BaseModel
 {
-	use HasMany;
+	use Relations;
 	
 }
 

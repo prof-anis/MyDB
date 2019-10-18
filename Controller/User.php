@@ -23,7 +23,7 @@ class User extends Model
 
   public function society()
   {
-  	return $this->hasMany('Controller\Society');
+  	return $this->hasOne('Controller\Society');
   }
 
 

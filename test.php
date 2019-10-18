@@ -39,7 +39,7 @@ function dd($value)
 //$pp=User::get();
 
 
-$jj=User::where('id',20)->first()->society;
+$jj=Society::where('id',9)->first()->user;
 
 
 
